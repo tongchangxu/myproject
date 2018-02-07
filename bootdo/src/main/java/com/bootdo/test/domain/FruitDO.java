@@ -20,10 +20,10 @@ public class FruitDO {
 	private String color;
 	//创建时间
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date createDate;
+	private String createDate;
 	//更新时间
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date updateDate;
+	private String updateDate;
 	//备注信息
 	private String remarks;
 	//删除标记
@@ -52,16 +52,16 @@ public class FruitDO {
 	public void setColor(String color) {
 		this.color = color;
 	}
-	public Date getCreateDate() {
+	public String getCreateDate() {
 		return createDate;
 	}
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(String createDate) {
 		this.createDate = createDate;
 	}
-	public Date getUpdateDate() {
+	public String getUpdateDate() {
 		return updateDate;
 	}
-	public void setUpdateDate(Date updateDate) {
+	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
 	}
 	public String getRemarks() {
