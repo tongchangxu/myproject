@@ -17,9 +17,9 @@ public interface FruitService {
 	
 	int count();
 	
-	int save(FruitDO user);
+	int save(FruitDO fruit);
 	
-	int update(FruitDO user);
+	int update(FruitDO fruit);
 	
 	int remove(Long id);
 }
