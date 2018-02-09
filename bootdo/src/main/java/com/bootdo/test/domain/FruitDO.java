@@ -1,5 +1,7 @@
 package com.bootdo.test.domain;
 
+import java.util.Date;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**

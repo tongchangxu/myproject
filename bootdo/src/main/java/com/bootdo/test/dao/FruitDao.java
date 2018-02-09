@@ -30,11 +30,11 @@ public interface FruitDao {
 	@Insert("INSERT INTO fruit (name,weight,color,create_date,remarks,del_flag) "
 			+ "values(#{name},#{weight},#{color},#{createDate},#{remarks},#{delFlag})")
 	@Options(useGeneratedKeys=true, keyProperty="id",keyColumn = "id")
-	int save(FruitDO fruit);
+	int save(FruitDO user);
 	
 	@Update("UPDATE fruit set(#{name},#{weight},#{color},#{createDate},#{updateDate},#{remarks},#{delFlag}) "
 			+ "WHERE id=#{id}")
-	int update(FruitDO fruit);
+	int update(FruitDO user);
 	
 	@Delete("DELETE FROM fruit WHERE id=#{id}")
 	int remove(Long id);

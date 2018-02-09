@@ -44,20 +44,20 @@ public class FruitController {
     @ResponseBody
     @GetMapping("/list")
     public PageUtils list(@RequestParam Map<String, Object> params) {
-    	String address = params.get("address").toString();
+    	String name = params.get("name").toString();
     	Integer offset = Integer.parseInt(params.get("offset").toString());
     	Integer limit = Integer.parseInt(params.get("limit").toString());
     	Map<String, Integer> map = new HashMap<>();
     	map.put("limit", limit);
     	map.put("offset", offset);
-    	if(address==null||address==""){
+    	if(name==null||name==""){
     		List<FruitDO> fruitList = fruitService.list(map);
             int total = fruitService.count();
             PageUtils pageUtil = new PageUtils(fruitList, total);
     		return pageUtil;
     	}else{
     		List<FruitDO> fruitList = new ArrayList<>();
-    		fruitList.add(fruitService.get(address));
+    		fruitList.add(fruitService.get(name));
         	int total = 1;
             PageUtils pageUtil = new PageUtils(fruitList, total);
     		return pageUtil;
