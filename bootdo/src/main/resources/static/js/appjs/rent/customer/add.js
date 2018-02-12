@@ -12,7 +12,7 @@ function save() {
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url : "/test/fruit/save",
+		url : "/rent/customer/save",
 		data : $('#signupForm').serialize(),// 你的formid
 		async : false,
 		error : function(request) {
@@ -37,36 +37,36 @@ function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
 	$("#signupForm").validate({
 		rules : {
-			name : {
+			number : {
 				required : true,
 				remote : {
-					url : "/test/fruit/exit", // 后台处理程序
+					url : "/rent/customer/exit", // 后台处理程序
 					type : "post", // 数据发送方式
 					dataType : "json", // 接受数据格式
 					data : { // 要传递的数据
-						name : function() {
-							return $("#name").val();
+						number : function() {
+							return $("#number").val();
 						} 
 					}
 				}
 			},
-			weight : {
-				required : true
-			},
-			color : {
+			customerName : {
 				required : true,
 			},
-			delFlag : {
+			customerStatus : {
 				required : function(){
-					return $("#delFlag").attr("checked");
+					return $("#houseStatus").attr("checked");
 				}
 			},
 			agree : "required"
 		},
 		messages : {
-			name : {
-				required : icon + "请输入水果名",
-				remote : icon + "水果名已经存在"
+			number : {
+				required : icon + "请输入业务号",
+				remote : icon + "该业务号已经存在"
+			},
+			customerName : {
+				required : icon + "请输入客户名称",
 			}
 		}
 	})

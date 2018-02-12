@@ -12,7 +12,7 @@ function save() {
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url : "/test/fruit/save",
+		url : "/rent/house/save",
 		data : $('#signupForm').serialize(),// 你的formid
 		async : false,
 		error : function(request) {
@@ -37,36 +37,42 @@ function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
 	$("#signupForm").validate({
 		rules : {
-			name : {
+			address : {
 				required : true,
 				remote : {
-					url : "/test/fruit/exit", // 后台处理程序
+					url : "/rent/house/exit", // 后台处理程序
 					type : "post", // 数据发送方式
 					dataType : "json", // 接受数据格式
 					data : { // 要传递的数据
 						name : function() {
-							return $("#name").val();
+							return $("#address").val();
 						} 
 					}
 				}
 			},
-			weight : {
-				required : true
-			},
-			color : {
+			space : {
 				required : true,
 			},
-			delFlag : {
+			area : {
+				required : true,
+			},
+			houseStatus : {
 				required : function(){
-					return $("#delFlag").attr("checked");
+					return $("#houseStatus").attr("checked");
 				}
 			},
 			agree : "required"
 		},
 		messages : {
-			name : {
-				required : icon + "请输入水果名",
-				remote : icon + "水果名已经存在"
+			address : {
+				required : icon + "请输入房屋地址",
+				remote : icon + "该房屋地址已经存在"
+			},
+			space : {
+				required : icon + "请输入面积",
+			},
+			area : {
+				required : icon + "请输入归属区域",
 			}
 		}
 	})
