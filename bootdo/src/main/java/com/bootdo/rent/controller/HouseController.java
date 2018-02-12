@@ -35,7 +35,7 @@ public class HouseController {
     private String prefix="rent/house";
     
     @GetMapping("")
-	String house(Model model) {
+	String fruit(Model model) {
 		return prefix + "/house";
 	}
     

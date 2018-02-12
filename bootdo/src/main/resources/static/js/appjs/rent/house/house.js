@@ -109,6 +109,7 @@ function add() {
 	});
 }
 function edit(houseId) {
+	alert(houseId);
 	layer.open({
 		type : 2,
 		title : '房屋修改',
