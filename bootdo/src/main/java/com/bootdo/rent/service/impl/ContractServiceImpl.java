@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bootdo.rent.dao.ContractDao;
+import com.bootdo.rent.domain.ContractDO;
 import com.bootdo.rent.service.ContractService;
 import com.bootdo.rent.vo.ContractVO;
 
@@ -17,17 +18,17 @@ public class ContractServiceImpl implements ContractService {
 	private ContractDao contractDao;
 
 	@Override
-	public ContractVO getId(Long contractId){
+	public ContractDO getId(Long contractId){
 		return contractDao.getId(contractId);
 	}
 	
 	@Override
-	public ContractVO get(String contractNumber) {
+	public ContractDO get(String contractNumber) {
 		return contractDao.get(contractNumber);
 	}
 	
 	@Override
-	public List<ContractVO> list(Map<String, Object> params) {
+	public List<ContractDO> list(Map<String, Object> params) {
 		return contractDao.list(params);
 	}
 
@@ -38,13 +39,13 @@ public class ContractServiceImpl implements ContractService {
 
 
 	@Override
-	public int save(ContractVO contract) {
+	public int save(ContractDO contract) {
 		return contractDao.save(contract);
 	}
 
 
 	@Override
-	public int update(ContractVO contract) {
+	public int update(ContractDO contract) {
 		return contractDao.update(contract);
 	}
 

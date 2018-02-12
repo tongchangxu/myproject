@@ -13,8 +13,6 @@ public class ContractDO {
 	private String operator;
 	//业务号
     private String number;
-	//客户名称
-	private String customerName;
 	//合同名称
     private String contractName;
 	//关联公司
@@ -23,8 +21,6 @@ public class ContractDO {
 	private String startTime;
 	//到期日期
 	private String stopTime;
-	//合同期限
-	private String contractPeriod;
 	//租金
 	private String rent;
 	//缴费周期
@@ -33,18 +29,27 @@ public class ContractDO {
     private String invoiceType;
 	//年递增率
 	private String growthRate;
+	//递增周期 growth_time
+	private String growthTime;
 	//租金明细
 	private String rentDetail;
 	//年租金
 	private String rentYear;
 	//定金
 	private String deposit;
-	//房屋序号
-	private String houseId;
 	//合同状态
 	private String contractStatus;
+	//合同状态说明
+	private String statusDescription;
 	//创建日期
 	private String createTime;
+	
+	public String getGrowthTime() {
+		return growthTime;
+	}
+	public void setGrowthTime(String growthTime) {
+		this.growthTime = growthTime;
+	}
 	public Long getContractId() {
 		return contractId;
 	}
@@ -69,12 +74,6 @@ public class ContractDO {
 	public void setNumber(String number) {
 		this.number = number;
 	}
-	public String getCustomerName() {
-		return customerName;
-	}
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
-	}
 	public String getContractName() {
 		return contractName;
 	}
@@ -98,12 +97,6 @@ public class ContractDO {
 	}
 	public void setStopTime(String stopTime) {
 		this.stopTime = stopTime;
-	}
-	public String getContractPeriod() {
-		return contractPeriod;
-	}
-	public void setContractPeriod(String contractPeriod) {
-		this.contractPeriod = contractPeriod;
 	}
 	public String getRent() {
 		return rent;
@@ -147,17 +140,17 @@ public class ContractDO {
 	public void setDeposit(String deposit) {
 		this.deposit = deposit;
 	}
-	public String getHouseId() {
-		return houseId;
-	}
-	public void setHouseId(String houseId) {
-		this.houseId = houseId;
-	}
 	public String getContractStatus() {
 		return contractStatus;
 	}
 	public void setContractStatus(String contractStatus) {
 		this.contractStatus = contractStatus;
+	}
+	public String getStatusDescription() {
+		return statusDescription;
+	}
+	public void setStatusDescription(String statusDescription) {
+		this.statusDescription = statusDescription;
 	}
 	public String getCreateTime() {
 		return createTime;
@@ -168,13 +161,10 @@ public class ContractDO {
 	@Override
 	public String toString() {
 		return "ContractDO [contractId=" + contractId + ", contractNumber=" + contractNumber + ", operator=" + operator
-				+ ", number=" + number + ", customerName=" + customerName + ", contractName=" + contractName
-				+ ", company=" + company + ", startTime=" + startTime + ", stopTime=" + stopTime + ", contractPeriod="
-				+ contractPeriod + ", rent=" + rent + ", leadTime=" + leadTime + ", invoiceType=" + invoiceType
-				+ ", growthRate=" + growthRate + ", rentDetail=" + rentDetail + ", rentYear=" + rentYear + ", deposit="
-				+ deposit + ", houseId=" + houseId + ", contractStatus=" + contractStatus + ", createTime=" + createTime
-				+ "]";
+				+ ", number=" + number + ", contractName=" + contractName + ", company=" + company + ", startTime="
+				+ startTime + ", stopTime=" + stopTime + ", rent=" + rent + ", leadTime=" + leadTime + ", invoiceType="
+				+ invoiceType + ", growthRate=" + growthRate + ", rentDetail=" + rentDetail + ", rentYear=" + rentYear
+				+ ", deposit=" + deposit + ", contractStatus=" + contractStatus + ", statusDescription="
+				+ statusDescription + ", createTime=" + createTime + "]";
 	}
-	
-	
 }

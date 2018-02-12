@@ -67,6 +67,18 @@ function load() {
 						title : '房间说明'
 					},
 					{
+						field : 'houseType',
+						title : '房屋类型',
+						align : 'center',
+						formatter : function(value, row, index) {
+							if (value == 'B013') {
+								return '<span class="label label-danger">存续</span>';
+							} else if (value == 'A013') {
+								return '<span class="label label-primary">股份</span>';
+							}
+						}
+					} ,
+					{
 						field : 'houseStatus',
 						title : '房屋状态',
 						align : 'center',

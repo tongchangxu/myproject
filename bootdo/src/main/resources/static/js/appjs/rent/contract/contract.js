@@ -32,6 +32,9 @@ function load() {
 						// 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 						limit : params.limit,
 						offset : params.offset,
+						address : $('#address').val(),
+						houseNumber : $('#houseNumber').val(),
+						number : $('#number').val(),
 						constractNumber : $('#searchName').val(),
 					};
 				},
@@ -46,7 +49,7 @@ function load() {
 						checkbox : true
 					},
 					{
-						field : 'houseId', // 列字段名
+						field : 'contractId', // 列字段名
 						title : '合同序号' // 列标题
 					},
 					{
@@ -60,10 +63,6 @@ function load() {
 					{
 						field : 'number',
 						title : '业务号'
-					},
-					{
-						field : 'customerName',
-						title : '用户名称'
 					},
 					{
 						field : 'contractName',
@@ -98,20 +97,16 @@ function load() {
 						title : '年递增率'
 					},
 					{
+						field : 'growthTime',
+						title : '递增周期'
+					},
+					{
 						field : 'rentDetail',
 						title : '租金明细'
 					},
 					{
-						field : 'rentYear',
-						title : '年租金'
-					},
-					{
 						field : 'deposit',
 						title : '定金'
-					},
-					{
-						field : 'houseId',
-						title : '房屋编号'
 					},
 					{
 						field : 'createTime',
@@ -130,12 +125,17 @@ function load() {
 						}
 					} ,
 					{
+						field : 'statusDescription',
+						title : '合同状态说明'
+						
+					} ,
+					{
 						title : '操作',
-						field : 'contract_id',
+						field : 'contractId',
 						align : 'center',
 						formatter : function(value, row, index) {
 							var e = '<a  class="btn btn-primary btn-sm" href="#" mce_href="#" title="编辑" onclick="edit(\''
-								+ row.houseId
+								+ row.contractId
 								+ '\')"><i class="fa fa-edit "></i></a> ';
 							return e;
 						}
@@ -152,7 +152,7 @@ function add() {
 	// iframe层
 	layer.open({
 		type : 2,
-		title : '增加房屋',
+		title : '创建合同',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],
@@ -162,7 +162,7 @@ function add() {
 function edit(houseId) {
 	layer.open({
 		type : 2,
-		title : '房屋修改',
+		title : '修改合同',
 		maxmin : true,
 		shadeClose : false,
 		area : [ '800px', '520px' ],
@@ -182,7 +182,7 @@ function batchRemove() {
 		var ids = new Array();
 		// 遍历所有选择的行数据，取每条数据对应的ID
 		$.each(rows, function(i, row) {
-			ids[i] = row['houseId'];
+			ids[i] = row['contractId'];
 		});
 		
 		$.ajax({

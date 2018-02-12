@@ -3,6 +3,7 @@ package com.bootdo.rent.service;
 import java.util.List;
 import java.util.Map;
 
+import com.bootdo.rent.domain.ContractDO;
 import com.bootdo.rent.vo.ContractVO;
 
 /**
@@ -11,17 +12,17 @@ import com.bootdo.rent.vo.ContractVO;
  *
  */
 public interface ContractService {
-	ContractVO getId(Long contractId);
+	ContractDO getId(Long contractId);
 	
-	ContractVO get(String name);
+	ContractDO get(String name);
 	
-	List<ContractVO> list(Map<String, Object> params);
+	List<ContractDO> list(Map<String, Object> params);
 	
 	int count();
 	
-	int save(ContractVO contract);
+	int save(ContractDO contract);
 	
-	int update(ContractVO contract);
+	int update(ContractDO contract);
 	
 	int remove(Long contractId);
 }

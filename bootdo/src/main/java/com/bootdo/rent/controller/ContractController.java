@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bootdo.common.utils.PageUtils;
+import com.bootdo.rent.domain.ContractDO;
 import com.bootdo.rent.service.ContractService;
 import com.bootdo.rent.vo.ContractVO;
 
@@ -42,7 +43,19 @@ public class ContractController {
     	Map<String, Object> map = new HashMap<>();
     	map.put("limit", limit);
     	map.put("offset", offset);
-    	List<ContractVO> contractList = contractService.list(map);
+    	if(params.get("houseNumber")!=null&&params.get("houseNumber")!=""){
+    		map.put("houseNumber", params.get("houseNumber").toString());
+    	}
+    	if(params.get("address")!=null&&params.get("address")!=""){
+    		map.put("address", params.get("address").toString());
+    	}
+    	if(params.get("number")!=null&&params.get("number")!=""){
+    		map.put("number", params.get("number").toString());
+    	}
+    	if(params.get("contractNumber")!=null&&params.get("contractNumber")!=""){
+    		map.put("contractNumber", params.get("contractNumber").toString());
+    	}
+    	List<ContractDO> contractList = contractService.list(map);
         int total = contractService.count();
         PageUtils pageUtil = new PageUtils(contractList, total);
   		return pageUtil;

@@ -46,9 +46,6 @@ public class CustomerController {
     	Map<String, Object> map = new HashMap<>();
     	map.put("limit", limit);
     	map.put("offset", offset);
-    	if(params.get("number")!=null&&params.get("number")!=""){
-    		map.put("number", params.get("number").toString());
-    	}
     	if(params.get("customerId")!=null&&params.get("customerId")!=""){
     		map.put("customerId", params.get("customerId").toString());
     	}
