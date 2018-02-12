@@ -56,6 +56,11 @@ function validateRule() {
 			area : {
 				required : true,
 			},
+			houseType : {
+				required : function(){
+					return $("#houseType").attr("checked");
+				}
+			},
 			houseStatus : {
 				required : function(){
 					return $("#houseStatus").attr("checked");

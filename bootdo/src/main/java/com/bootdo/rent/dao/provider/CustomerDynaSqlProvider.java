@@ -10,9 +10,6 @@ public class CustomerDynaSqlProvider {
             {  
                 SELECT("*");  
                 FROM("customer");  
-                if(map.containsKey("number")){  
-                    WHERE("number = #{number}");  
-                }  
                 if(map.containsKey("customerId")){  
                     WHERE("customer_id=#{customerId}");  
                 }
