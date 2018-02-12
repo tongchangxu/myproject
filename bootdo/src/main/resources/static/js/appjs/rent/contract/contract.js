@@ -1,4 +1,4 @@
-var prefix = "/rent/house"
+var prefix = "/rent/contract"
 $(function() {
 	load();
 });
@@ -32,8 +32,7 @@ function load() {
 						// 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 						limit : params.limit,
 						offset : params.offset,
-						address : $('#searchName').val(),
-						houseId : $('#searchId').val(),
+						constractNumber : $('#searchName').val(),
 					};
 				},
 				// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -48,39 +47,91 @@ function load() {
 					},
 					{
 						field : 'houseId', // 列字段名
-						title : '房屋序号' // 列标题
+						title : '合同序号' // 列标题
 					},
 					{
-						field : 'address',
-						title : '地址'
+						field : 'contractNumber',
+						title : '正式合同编号'
 					},
 					{
-						field : 'space',
-						title : '面积'
+						field : 'operator',
+						title : '经办人'
 					},
 					{
-						field : 'area',
-						title : '归属区域'
+						field : 'number',
+						title : '业务号'
 					},
 					{
-						field : 'houseRemark',
-						title : '房间说明'
+						field : 'customerName',
+						title : '用户名称'
 					},
 					{
-						field : 'houseStatus',
-						title : '房屋状态',
+						field : 'contractName',
+						title : '合同名称'
+					},
+					{
+						field : 'company',
+						title : '关联公司'
+					},
+					{
+						field : 'rent',
+						title : '租金'
+					},
+					{
+						field : 'startTime',
+						title : '起始时间'
+					},
+					{
+						field : 'stopTime',
+						title : '到期日期'
+					},
+					{
+						field : 'leadTime',
+						title : '缴费周期'
+					},
+					{
+						field : 'invoiceType',
+						title : '发票类型'
+					},
+					{
+						field : 'growthRate',
+						title : '年递增率'
+					},
+					{
+						field : 'rentDetail',
+						title : '租金明细'
+					},
+					{
+						field : 'rentYear',
+						title : '年租金'
+					},
+					{
+						field : 'deposit',
+						title : '定金'
+					},
+					{
+						field : 'houseId',
+						title : '房屋编号'
+					},
+					{
+						field : 'createTime',
+						title : '创建日期'
+					},
+					{
+						field : 'contractStatus',
+						title : '合同状态',
 						align : 'center',
 						formatter : function(value, row, index) {
 							if (value == '0') {
-								return '<span class="label label-danger">已入住</span>';
+								return '<span class="label label-danger">未生效</span>';
 							} else if (value == '1') {
-								return '<span class="label label-primary">闲置</span>';
+								return '<span class="label label-primary">已生效</span>';
 							}
 						}
 					} ,
 					{
 						title : '操作',
-						field : 'houseId',
+						field : 'contract_id',
 						align : 'center',
 						formatter : function(value, row, index) {
 							var e = '<a  class="btn btn-primary btn-sm" href="#" mce_href="#" title="编辑" onclick="edit(\''
@@ -115,7 +166,7 @@ function edit(houseId) {
 		maxmin : true,
 		shadeClose : false,
 		area : [ '800px', '520px' ],
-		content : prefix + '/edit/' + houseId // iframe的url
+		content : prefix + '/edit/' + contract // iframe的url
 	});
 }
 function batchRemove() {

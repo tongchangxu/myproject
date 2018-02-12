@@ -1,4 +1,4 @@
-var prefix = "/rent/house"
+var prefix = "/rent/customer"
 $(function() {
 	load();
 });
@@ -32,8 +32,8 @@ function load() {
 						// 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 						limit : params.limit,
 						offset : params.offset,
-						address : $('#searchName').val(),
-						houseId : $('#searchId').val(),
+						number : $('#number').val(),
+						customerId : $('#customerId').val(),
 					};
 				},
 				// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -47,34 +47,30 @@ function load() {
 						checkbox : true
 					},
 					{
-						field : 'houseId', // 列字段名
-						title : '房屋序号' // 列标题
+						field : 'customerId', // 列字段名
+						title : '客户序号' // 列标题
 					},
 					{
-						field : 'address',
-						title : '地址'
+						field : 'number',
+						title : '业务号码'
 					},
 					{
-						field : 'space',
-						title : '面积'
+						field : 'customerName',
+						title : '客户名称'
 					},
 					{
-						field : 'area',
-						title : '归属区域'
-					},
-					{
-						field : 'houseRemark',
+						field : 'customerRemark',
 						title : '房间说明'
 					},
 					{
-						field : 'houseStatus',
-						title : '房屋状态',
+						field : 'customerStatus',
+						title : '客户状态',
 						align : 'center',
 						formatter : function(value, row, index) {
 							if (value == '0') {
-								return '<span class="label label-danger">已入住</span>';
+								return '<span class="label label-danger">禁用</span>';
 							} else if (value == '1') {
-								return '<span class="label label-primary">闲置</span>';
+								return '<span class="label label-primary">正常</span>';
 							}
 						}
 					} ,
@@ -84,7 +80,7 @@ function load() {
 						align : 'center',
 						formatter : function(value, row, index) {
 							var e = '<a  class="btn btn-primary btn-sm" href="#" mce_href="#" title="编辑" onclick="edit(\''
-								+ row.houseId
+								+ row.customerId
 								+ '\')"><i class="fa fa-edit "></i></a> ';
 							return e;
 						}
@@ -101,21 +97,21 @@ function add() {
 	// iframe层
 	layer.open({
 		type : 2,
-		title : '增加房屋',
+		title : '增加客户',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],
 		content : prefix + '/add'
 	});
 }
-function edit(houseId) {
+function edit(customerId) {
 	layer.open({
 		type : 2,
-		title : '房屋修改',
+		title : '客户修改',
 		maxmin : true,
 		shadeClose : false,
 		area : [ '800px', '520px' ],
-		content : prefix + '/edit/' + houseId // iframe的url
+		content : prefix + '/edit/' + customerId // iframe的url
 	});
 }
 function batchRemove() {
@@ -131,7 +127,7 @@ function batchRemove() {
 		var ids = new Array();
 		// 遍历所有选择的行数据，取每条数据对应的ID
 		$.each(rows, function(i, row) {
-			ids[i] = row['houseId'];
+			ids[i] = row['customerId'];
 		});
 		
 		$.ajax({
