@@ -1,6 +1,5 @@
 package com.bootdo.rent.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,17 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.bootdo.common.annotation.Log;
 import com.bootdo.common.utils.PageUtils;
-import com.bootdo.common.utils.R;
-import com.bootdo.rent.domain.HouseDO;
-import com.bootdo.rent.service.HouseService;
+import com.bootdo.rent.service.ContractService;
+import com.bootdo.rent.vo.ContractVO;
 
 /**
  * 
@@ -28,53 +23,31 @@ import com.bootdo.rent.service.HouseService;
  */
 
 @Controller
-@RequestMapping("/rent/house")
-public class HouseController {
+@RequestMapping("/rent/contract")
+public class ContractController {
     @Autowired
-    private HouseService houseService;
-    private String prefix="rent/house";
+    private ContractService contractService;
+    private String prefix="rent/contract";
     
     @GetMapping("")
-	String house(Model model) {
-		return prefix + "/house";
+	String contract(Model model) {
+		return prefix + "/contract";
 	}
     
     @ResponseBody
     @GetMapping("/list")
     public PageUtils list(@RequestParam Map<String, Object> params) {
-    	String houseId = params.get("houseId").toString();
-    	String address = params.get("address").toString();
     	Integer offset = Integer.parseInt(params.get("offset").toString());
     	Integer limit = Integer.parseInt(params.get("limit").toString());
-    	Map<String, Integer> map = new HashMap<>();
+    	Map<String, Object> map = new HashMap<>();
     	map.put("limit", limit);
     	map.put("offset", offset);
-    	if(address==""&&houseId==""){
-    		List<HouseDO> houseList = houseService.list(map);
-            int total = houseService.count();
-            PageUtils pageUtil = new PageUtils(houseList, total);
-    		return pageUtil;
-    	}else{
-    		if(address!=""&&houseId==""){
-    			List<HouseDO> houseList = new ArrayList<>();
-        		houseList.add(houseService.get(address));
-            	int total = 1;
-                PageUtils pageUtil = new PageUtils(houseList, total);
-        		return pageUtil;
-    		}
-    		if(address==""&&houseId!=""){
-    			Long id = Long.parseLong(houseId);
-    			System.out.println("id="+id);
-    			List<HouseDO> houseList = new ArrayList<>();
-        		houseList.add(houseService.getId(id));
-            	int total = 1;
-                PageUtils pageUtil = new PageUtils(houseList, total);
-        		return pageUtil;
-    		}
-    		return null;
-    	}
+    	List<ContractVO> contractList = contractService.list(map);
+        int total = contractService.count();
+        PageUtils pageUtil = new PageUtils(contractList, total);
+  		return pageUtil;
     }
-   
+    /*
     @Log("添加房屋")
 	@GetMapping("/add")
 	String add(Model model) {
@@ -136,5 +109,5 @@ public class HouseController {
 			return R.ok();
 		}
 		return R.error();
-	}
+	}*/
 }
