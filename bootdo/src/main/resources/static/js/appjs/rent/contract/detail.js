@@ -1,38 +1,40 @@
+// 以下为官方示例
 $().ready(function() {
 	validateRule();
+	// $("#signupForm").validate();
 });
 
 $.validator.setDefaults({
 	submitHandler : function() {
-		save();
+		update();
 	}
 });
-
-function save() {
+function update() {
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url : "/rent/contract/save",
+		url : "/rent/contract/update",
 		data : $('#signupForm').serialize(),// 你的formid
 		async : false,
 		error : function(request) {
-			parent.layer.alert("Connection error");
+			alert("Connection error");
 		},
 		success : function(data) {
 			if (data.code == 0) {
-				parent.layer.msg("操作成功");
+				parent.layer.msg(data.msg);
 				parent.reLoad();
 				var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
 				parent.layer.close(index);
 
 			} else {
-				parent.layer.alert(data.msg)
+				parent.layer.msg(data.msg);
 			}
 
 		}
 	});
 
 }
+
 function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
 	$("#signupForm").validate({

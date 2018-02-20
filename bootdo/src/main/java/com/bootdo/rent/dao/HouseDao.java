@@ -8,8 +8,11 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
 
+import com.bootdo.rent.dao.provider.ContractDynaSqlProvider;
+import com.bootdo.rent.dao.provider.HouseDynaSqlProvider;
 import com.bootdo.rent.domain.HouseDO;
 /**
  * 
@@ -24,8 +27,8 @@ public interface HouseDao {
 	@Select("SELECT * FROM house WHERE address=#{address}")
 	HouseDO get(String address);
 	
-	@Select("SELECT * FROM house limit #{limit} offset #{offset}")
-	List<HouseDO> list(Map<String, Integer> paramst);
+	@SelectProvider(type=HouseDynaSqlProvider.class,method="getHouse")  
+	List<HouseDO> list(Map<String, Object> paramst);
 	
 	@Select("SELECT count(*) FROM house")
 	int count();

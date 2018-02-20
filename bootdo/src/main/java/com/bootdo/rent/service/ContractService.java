@@ -14,15 +14,19 @@ import com.bootdo.rent.vo.ContractVO;
 public interface ContractService {
 	ContractDO getId(Long contractId);
 	
-	ContractDO get(String name);
+	ContractDO get(String contractNumber);
+	
+	ContractDO getByContractNumber(String contractNumber);
 	
 	List<ContractDO> list(Map<String, Object> params);
 	
+	ContractVO detail(String contractNumber);
+	
 	int count();
 	
-	int save(ContractDO contract);
+	int save(ContractVO contract);
 	
-	int update(ContractDO contract);
+	int update(ContractVO contract);
 	
 	int remove(Long contractId);
 }

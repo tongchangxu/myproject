@@ -15,7 +15,7 @@ public interface HouseService {
 	
 	HouseDO get(String name);
 	
-	List<HouseDO> list(Map<String, Integer> params);
+	List<HouseDO> list(Map<String, Object> params);
 	
 	int count();
 	

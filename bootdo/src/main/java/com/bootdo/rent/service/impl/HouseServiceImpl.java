@@ -27,7 +27,7 @@ public class HouseServiceImpl implements HouseService {
 	}
 	
 	@Override
-	public List<HouseDO> list(Map<String, Integer> params) {
+	public List<HouseDO> list(Map<String, Object> params) {
 		return houseDao.list(params);
 	}
 

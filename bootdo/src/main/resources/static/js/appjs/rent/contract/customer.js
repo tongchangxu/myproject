@@ -18,7 +18,7 @@ function load() {
 				pagination : true, // 设置为true会在底部显示分页条
 				// queryParamsType : "limit",
 				// //设置为limit则会发送符合RESTFull格式的参数
-				singleSelect : false, // 设置为true将禁止多选
+				singleSelect : true, // 设置为true将禁止多选
 				// contentType : "application/x-www-form-urlencoded",
 				// //发送到服务器的数据编码类型
 				pageSize : 10, // 如果设置了分页，每页数据条数
@@ -43,9 +43,6 @@ function load() {
 				// sortOrder.
 				// 返回false将会终止请求
 				columns : [
-					{
-						checkbox : true
-					},
 					{
 						field : 'customerId', // 列字段名
 						title : '客户序号' // 列标题
@@ -75,9 +72,9 @@ function load() {
 						field : 'customerId',
 						align : 'center',
 						formatter : function(value, row, index) {
-							var e = '<a  class="btn btn-primary btn-sm" href="#" mce_href="#" title="编辑" onclick="edit(\''
+							var e = '<a  class="btn btn-primary btn-sm" href="#" mce_href="#" title="选择" onclick="selectCustomer(\''
 								+ row.customerId
-								+ '\')"><i class="fa fa-edit "></i></a> ';
+								+ '\')"><i class="fa fa-edit ">选择</i></a> ';
 							return e;
 						}
 					} ]
@@ -88,58 +85,9 @@ function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }
 
+function selectCustomer(customerId){
+	var parentMethodValue=parent.getMethodValue(customerId);//访问父页面方法 
+	var index = parent.layer.getFrameIndex(window.name); //获取窗口索引  
+	parent.layer.close(index);//关闭弹出的子页面窗口  
+}
 
-function add() {
-	// iframe层
-	layer.open({
-		type : 2,
-		title : '增加客户',
-		maxmin : true,
-		shadeClose : false, // 点击遮罩关闭层
-		area : [ '800px', '520px' ],
-		content : prefix + '/add'
-	});
-}
-function edit(customerId) {
-	layer.open({
-		type : 2,
-		title : '客户修改',
-		maxmin : true,
-		shadeClose : false,
-		area : [ '800px', '520px' ],
-		content : prefix + '/edit/' + customerId // iframe的url
-	});
-}
-function batchRemove() {
-	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
-	if (rows.length == 0) {
-		layer.msg("请选择要删除的数据");
-		return;
-	}
-	layer.confirm("确认要删除选中的'" + rows.length + "'条数据吗?", {
-		btn : [ '确定', '取消' ]
-	// 按钮
-	}, function() {
-		var ids = new Array();
-		// 遍历所有选择的行数据，取每条数据对应的ID
-		$.each(rows, function(i, row) {
-			ids[i] = row['customerId'];
-		});
-		
-		$.ajax({
-			type : 'POST',
-			data : {
-				"ids" : ids
-			},
-			url : prefix + '/batchRemove',
-			success : function(r) {
-				if (r.code == 0) {
-					layer.msg(r.msg);
-					reLoad();
-				} else {
-					layer.msg(r.msg);
-				}
-			}
-		});
-	}, function() {});
-}

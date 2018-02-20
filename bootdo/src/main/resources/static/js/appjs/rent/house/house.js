@@ -32,8 +32,9 @@ function load() {
 						// 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 						limit : params.limit,
 						offset : params.offset,
-						address : $('#searchName').val(),
-						houseId : $('#searchId').val(),
+						address : $('#address').val(),
+						houseId : $('#houseId').val(),
+						houseNumber : $('#houseNumber').val(),
 					};
 				},
 				// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -49,6 +50,10 @@ function load() {
 					{
 						field : 'houseId', // 列字段名
 						title : '房屋序号' // 列标题
+					},
+					{
+						field : 'houseNumber', // 列字段名
+						title : '房屋编号' // 列标题
 					},
 					{
 						field : 'address',

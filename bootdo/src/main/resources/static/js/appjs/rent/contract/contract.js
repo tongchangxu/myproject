@@ -35,7 +35,7 @@ function load() {
 						address : $('#address').val(),
 						houseNumber : $('#houseNumber').val(),
 						number : $('#number').val(),
-						constractNumber : $('#searchName').val(),
+						contractNumber : $('#contractNumber').val()
 					};
 				},
 				// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -53,8 +53,15 @@ function load() {
 						title : '合同序号' // 列标题
 					},
 					{
+						title : '正式合同编号',
 						field : 'contractNumber',
-						title : '正式合同编号'
+						align : 'center',
+						formatter : function(value, row, index) {
+							var e = '<a href="#"  onclick="edit(\''
+									+ row.contractNumber
+									+ '\')">'+row.contractNumber+'</a> ';
+							return e;
+						}
 					},
 					{
 						field : 'operator',
@@ -128,25 +135,13 @@ function load() {
 						field : 'statusDescription',
 						title : '合同状态说明'
 						
-					} ,
-					{
-						title : '操作',
-						field : 'contractId',
-						align : 'center',
-						formatter : function(value, row, index) {
-							var e = '<a  class="btn btn-primary btn-sm" href="#" mce_href="#" title="编辑" onclick="edit(\''
-								+ row.contractId
-								+ '\')"><i class="fa fa-edit "></i></a> ';
-							return e;
-						}
-					} ]
+					}]
 			});
 }
 
 function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }
-
 
 function add() {
 	// iframe层
@@ -155,18 +150,18 @@ function add() {
 		title : '创建合同',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '800px', '520px' ],
+		area : [ '1400px', '520px' ],
 		content : prefix + '/add'
 	});
 }
-function edit(houseId) {
+function edit(contractNumber) {
 	layer.open({
 		type : 2,
 		title : '修改合同',
 		maxmin : true,
 		shadeClose : false,
-		area : [ '800px', '520px' ],
-		content : prefix + '/edit/' + contract // iframe的url
+		area : [ '1400px', '520px' ],
+		content : prefix + '/detail/' + contractNumber // iframe的url
 	});
 }
 function batchRemove() {

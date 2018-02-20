@@ -37,6 +37,9 @@ function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
 	$("#signupForm").validate({
 		rules : {
+			houseNumber : {
+				required : true,
+			},
 			address : {
 				required : true,
 				remote : {
@@ -69,6 +72,9 @@ function validateRule() {
 			agree : "required"
 		},
 		messages : {
+			houseNumber : {
+				required : icon + "请输入房屋编号",
+			},
 			address : {
 				required : icon + "请输入房屋地址",
 				remote : icon + "该房屋地址已经存在"
