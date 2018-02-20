@@ -26,12 +26,21 @@ public class ContractServiceImpl implements ContractService {
 	public ContractDO get(String contractNumber) {
 		return contractDao.get(contractNumber);
 	}
+	@Override
+	public ContractDO getByContractNumber(String contractNumber){
+		return contractDao.getByContractNumber(contractNumber);
+	}
 	
 	@Override
 	public List<ContractDO> list(Map<String, Object> params) {
 		return contractDao.list(params);
 	}
-
+	
+	@Override
+	public ContractVO detail(String contractNumber){
+		return contractDao.detail(contractNumber);
+	}
+	
 	@Override
 	public int count() {
 		return contractDao.count();
@@ -39,13 +48,13 @@ public class ContractServiceImpl implements ContractService {
 
 
 	@Override
-	public int save(ContractDO contract) {
+	public int save(ContractVO contract) {
 		return contractDao.save(contract);
 	}
 
 
 	@Override
-	public int update(ContractDO contract) {
+	public int update(ContractVO contract) {
 		return contractDao.update(contract);
 	}
 

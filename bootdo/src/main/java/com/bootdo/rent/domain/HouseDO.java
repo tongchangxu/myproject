@@ -8,16 +8,33 @@ package com.bootdo.rent.domain;
 public class HouseDO {
 	//房屋序号
 	private Long houseId;
+	//房屋序号
+    private String houseNumber;
 	//地址
 	private String address;
 	//面积
 	private String space;
+	//房屋类型
+	private String houseType;
 	//房屋状态
 	private String houseStatus;
 	//归属区域
 	private String area;
 	//房间说明
 	private String houseRemark;
+	
+	public String getHouseNumber() {
+		return houseNumber;
+	}
+	public void setHouseNumber(String houseNumber) {
+		this.houseNumber = houseNumber;
+	}
+	public String getHouseType() {
+		return houseType;
+	}
+	public void setHouseType(String houseType) {
+		this.houseType = houseType;
+	}
 	public Long getHouseId() {
 		return houseId;
 	}
@@ -56,8 +73,9 @@ public class HouseDO {
 	}
 	@Override
 	public String toString() {
-		return "HouseDO [houseId=" + houseId + ", address=" + address + ", space=" + space + ", houseStatus="
-				+ houseStatus + ", area=" + area + ", houseRemark=" + houseRemark + "]";
+		return "HouseDO [houseId=" + houseId + ", houseNumber=" + houseNumber + ", address=" + address + ", space="
+				+ space + ", houseType=" + houseType + ", houseStatus=" + houseStatus + ", area=" + area
+				+ ", houseRemark=" + houseRemark + "]";
 	}
 	
 	

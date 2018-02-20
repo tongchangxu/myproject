@@ -13,6 +13,9 @@ public class CustomerDynaSqlProvider {
                 if(map.containsKey("customerId")){  
                     WHERE("customer_id=#{customerId}");  
                 }
+                if(map.containsKey("customerName")){  
+                    WHERE("customer_name=#{customerName}");  
+                }
             } 
         }.toString(); 
         System.out.println(map.toString());

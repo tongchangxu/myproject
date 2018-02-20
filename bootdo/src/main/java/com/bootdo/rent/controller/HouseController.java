@@ -1,6 +1,5 @@
 package com.bootdo.rent.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bootdo.common.annotation.Log;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.R;
+import com.bootdo.rent.domain.CustomerDO;
 import com.bootdo.rent.domain.HouseDO;
 import com.bootdo.rent.service.HouseService;
 
@@ -38,41 +38,39 @@ public class HouseController {
 	String house(Model model) {
 		return prefix + "/house";
 	}
+    @PostMapping("/getId")
+	@ResponseBody
+	HouseDO getId(@RequestParam Map<String, Object> params) {
+    	Long houseId = Long.parseLong(params.get("houseId").toString());
+    	return houseService.getId(houseId);
+	}
+    
+    @GetMapping("/selectHouse")
+	String selectHouse(Model model) {
+		return "rent/contract/selectHouse";
+	}
     
     @ResponseBody
     @GetMapping("/list")
     public PageUtils list(@RequestParam Map<String, Object> params) {
-    	String houseId = params.get("houseId").toString();
-    	String address = params.get("address").toString();
     	Integer offset = Integer.parseInt(params.get("offset").toString());
     	Integer limit = Integer.parseInt(params.get("limit").toString());
-    	Map<String, Integer> map = new HashMap<>();
+    	Map<String, Object> map = new HashMap<>();
     	map.put("limit", limit);
     	map.put("offset", offset);
-    	if(address==""&&houseId==""){
-    		List<HouseDO> houseList = houseService.list(map);
-            int total = houseService.count();
-            PageUtils pageUtil = new PageUtils(houseList, total);
-    		return pageUtil;
-    	}else{
-    		if(address!=""&&houseId==""){
-    			List<HouseDO> houseList = new ArrayList<>();
-        		houseList.add(houseService.get(address));
-            	int total = 1;
-                PageUtils pageUtil = new PageUtils(houseList, total);
-        		return pageUtil;
-    		}
-    		if(address==""&&houseId!=""){
-    			Long id = Long.parseLong(houseId);
-    			System.out.println("id="+id);
-    			List<HouseDO> houseList = new ArrayList<>();
-        		houseList.add(houseService.getId(id));
-            	int total = 1;
-                PageUtils pageUtil = new PageUtils(houseList, total);
-        		return pageUtil;
-    		}
-    		return null;
+    	if(params.get("houseId")!=null&&params.get("houseId")!=""){
+    		map.put("houseId", Integer.parseInt(params.get("houseId").toString()));
     	}
+    	if(params.get("houseNumber")!=null&&params.get("houseNumber")!=""){
+    		map.put("houseNumber", params.get("houseNumber").toString());
+    	}
+    	if(params.get("address")!=null&&params.get("address")!=""){
+    		map.put("address", params.get("address").toString());
+    	}
+    	List<HouseDO> houseList = houseService.list(map);
+        int total = houseService.count();
+        PageUtils pageUtil = new PageUtils(houseList, total);
+  		return pageUtil;
     }
    
     @Log("添加房屋")
@@ -137,4 +135,5 @@ public class HouseController {
 		}
 		return R.error();
 	}
+	
 }
