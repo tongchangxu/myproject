@@ -7,7 +7,7 @@ function load() {
 		.bootstrapTable(
 			{
 				method : 'get', // 服务器数据的请求方式 get or post
-				url : prefix + "/normalList", // 服务器数据的加载地址
+				url : prefix + "/handleList", // 服务器数据的加载地址
 				// showRefresh : true,
 				// showToggle : true,
 				// showColumns : true,
@@ -53,7 +53,7 @@ function load() {
 					},
 					{
 						field : 'customerRemark',
-						title : '房间说明'
+						title : '客户说明'
 					},
 					{
 						field : 'customerStatus',
@@ -72,12 +72,19 @@ function load() {
 						field : 'customerId',
 						align : 'center',
 						formatter : function(value, row, index) {
-							var e = '<a  class="btn btn-primary btn-sm" href="#" mce_href="#" title="选择" onclick="selectCustomer(\''
+							var e = '<a  class="btn btn-primary btn-sm" href="#" mce_href="#" title="编辑" onclick="edit(\''
 								+ row.customerId
-								+ '\')"><i class="fa fa-edit ">选择</i></a> ';
+								+ '\')"><i class="fa fa-edit "></i></a> ';
 							return e;
 						}
-					} ]
+					},{
+						field : 'handle',
+						title : '操作'
+					},
+					{
+						field : 'handleTime',
+						title : '操作日期'
+					}]
 			});
 }
 
@@ -85,9 +92,4 @@ function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }
 
-function selectCustomer(customerId){
-	var parentMethodValue=parent.getMethodValue(customerId);//访问父页面方法 
-	var index = parent.layer.getFrameIndex(window.name); //获取窗口索引  
-	parent.layer.close(index);//关闭弹出的子页面窗口  
-}
 

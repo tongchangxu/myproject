@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox">
+					<div class="ibox-body">
+						<div class="fixed-table-toolbar">
+							<div class="columns pull-right">
+								<button class="btn btn-success" onclick="reLoad()">查询</button>
+							</div>
+							<div class="columns pull-right col-md-1 nopadding">
+								<div class="input-group">
+									<input id="month2" type="text" class="form-control" placeholder="月份">
+									<div class="input-group-addon">月</div>
+								</div>	
+							</div>
+							<div class="columns pull-right col-md-1 nopadding">
+								<div class="input-group">
+									<input id="year2" type="text" class="form-control" placeholder="年份">
+									<div class="input-group-addon">年</div>
+								</div>
+							</div>
+							<div class="columns pull-right nopadding">---</div>
+							<div class="columns pull-right col-md-1 nopadding">
+								<div class="input-group">
+									<input id="month1" type="text" class="form-control" placeholder="月份">
+									<div class="input-group-addon">月</div>
+								</div>	
+							</div>
+							<div class="columns pull-right col-md-1 nopadding">
+								<div class="input-group">
+									<input id="year1" type="text" class="form-control" placeholder="年份">
+									<div class="input-group-addon">年</div>
+								</div>
+							</div>
+						</div>
+						<input id="number" type="hidden" th:value="${number}"  class="form-control">
+						<table id="exampleTable" data-mobile-responsive="true">
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:include="include :: footer"></div>
+	<script type="text/javascript" src="/js/appjs/rent/receivable/receivableList.js"></script>
+</body>
+</html>

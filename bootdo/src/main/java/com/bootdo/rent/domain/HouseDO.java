@@ -22,7 +22,31 @@ public class HouseDO {
 	private String area;
 	//房间说明
 	private String houseRemark;
-	
+	//操作时间
+    private String handleTime;
+    //操作
+    private String handle;
+    //操作序號
+    private Long houseHandleId;
+    
+	public String getHandleTime() {
+		return handleTime;
+	}
+	public void setHandleTime(String handleTime) {
+		this.handleTime = handleTime;
+	}
+	public String getHandle() {
+		return handle;
+	}
+	public void setHandle(String handle) {
+		this.handle = handle;
+	}
+	public Long getHouseHandleId() {
+		return houseHandleId;
+	}
+	public void setHouseHandleId(Long houseHandleId) {
+		this.houseHandleId = houseHandleId;
+	}
 	public String getHouseNumber() {
 		return houseNumber;
 	}
@@ -70,12 +94,6 @@ public class HouseDO {
 	}
 	public void setHouseRemark(String houseRemark) {
 		this.houseRemark = houseRemark;
-	}
-	@Override
-	public String toString() {
-		return "HouseDO [houseId=" + houseId + ", houseNumber=" + houseNumber + ", address=" + address + ", space="
-				+ space + ", houseType=" + houseType + ", houseStatus=" + houseStatus + ", area=" + area
-				+ ", houseRemark=" + houseRemark + "]";
 	}
 	
 	

@@ -30,12 +30,21 @@ public class CustomerServiceImpl implements CustomerService {
 	public List<CustomerDO> list(Map<String, Object> params) {
 		return customerDao.list(params);
 	}
+	
+	@Override
+	public List<CustomerDO> normalList(Map<String, Object> params){
+		return customerDao.normalList(params);
+	}
 
+	@Override
+	public int normalCount(){
+		return customerDao.normalCount();
+	}
+	
 	@Override
 	public int count() {
 		return customerDao.count();
 	}
-
 
 	@Override
 	public int save(CustomerDO customer) {
@@ -52,6 +61,21 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public int remove(Long id) {
 		return customerDao.remove(id);
+	}
+
+	@Override
+	public int updateHandle(CustomerDO customer) {
+		return customerDao.updateHandle(customer);
+	}
+
+	@Override
+	public List<CustomerDO> handleList(Map<String, Object> params) {
+		return customerDao.handleList(params);
+	}
+
+	@Override
+	public int countForHandle() {
+		return customerDao.countForHandle();
 	}
 
 

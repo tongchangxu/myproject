@@ -1,4 +1,4 @@
-var prefix = "/rent/customer"
+var prefix = "/rent/receivable"
 $(function() {
 	load();
 });
@@ -18,7 +18,7 @@ function load() {
 				pagination : true, // 设置为true会在底部显示分页条
 				// queryParamsType : "limit",
 				// //设置为limit则会发送符合RESTFull格式的参数
-				singleSelect : false, // 设置为true将禁止多选
+				singleSelect : true, // 设置为true将禁止多选
 				// contentType : "application/x-www-form-urlencoded",
 				// //发送到服务器的数据编码类型
 				pageSize : 10, // 如果设置了分页，每页数据条数
@@ -32,8 +32,8 @@ function load() {
 						// 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 						limit : params.limit,
 						offset : params.offset,
-						customerId : $('#customerId').val(),
-						customerName : $('#customerName').val(),
+						year : $('#year').val(),
+						month : $('#month').val(),
 					};
 				},
 				// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -44,43 +44,62 @@ function load() {
 				// 返回false将会终止请求
 				columns : [
 					{
-						checkbox : true
-					},
-					{
-						field : 'customerId', // 列字段名
-						title : '客户序号' // 列标题
-					},
-					{
-						field : 'customerName',
-						title : '客户名称'
-					},
-					{
-						field : 'customerRemark',
-						title : '客户说明'
-					},
-					{
-						field : 'customerStatus',
-						title : '客户状态',
+						field : 'number', // 列字段名
+						title : '业务号' ,// 列标题
 						align : 'center',
 						formatter : function(value, row, index) {
-							if (value == '0') {
-								return '<span class="label label-danger">禁用</span>';
-							} else if (value == '1') {
-								return '<span class="label label-primary">正常</span>';
+							var e = '<a href="#"  onclick="receivables(\''
+									+ row.number
+									+ '\')">'+row.number+'</a> ';
+							return e;
+						}
+					},
+					{
+						field : 'receivableAmount', // 列字段名
+						title : '缴费金额' // 列标题
+					},
+					{
+						field : 'payStatus', // 列字段名
+						title : '缴费状态', // 列标题
+						align : 'center',
+						formatter : function(value, row, index) {
+							if (value == '未付') {
+								return '<span class="label label-primary">未付</span>';
+							} else if (value == '已付清') {
+								return '<span class="label label-danger">已付清</span>';
+							}
+						}
+					},
+					{
+						field : 'receivableDate', // 列字段名
+						title : '缴费日期' // 列标题
+					},
+					{
+						field : 'contractStatus',
+						title : '合同状态',
+						align : 'center',
+						formatter : function(value, row, index) {
+							if (value == '新增') {
+								return '<span class="label label-success">新增</span>';
+							} else if (value == '在用') {
+								return '<span class="label label-primary">在用</span>';
+							} else if (value == '退租') {
+								return '<span class="label label-warning">退租</span>';
+							} else if (value == '合同到期') {
+								return '<span class="label label-default">合同到期</span>';
+							} else if (value == '终止协议') {
+								return '<span class="label label-danger">终止协议</span>';
 							}
 						}
 					} ,
 					{
-						title : '操作',
-						field : 'customerId',
-						align : 'center',
-						formatter : function(value, row, index) {
-							var e = '<a  class="btn btn-primary btn-sm" href="#" mce_href="#" title="编辑" onclick="edit(\''
-								+ row.customerId
-								+ '\')"><i class="fa fa-edit "></i></a> ';
-							return e;
-						}
-					} ]
+						field : 'area',
+						title : '归属区域'
+					},
+					{
+						field : 'contractName',
+						title : '合同名称'
+					}]
 			});
 }
 
@@ -88,58 +107,23 @@ function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }
 
-
-function add() {
-	// iframe层
+function edit(houseId) {
 	layer.open({
 		type : 2,
-		title : '增加客户',
-		maxmin : true,
-		shadeClose : false, // 点击遮罩关闭层
-		area : [ '800px', '520px' ],
-		content : prefix + '/add'
-	});
-}
-function edit(customerId) {
-	layer.open({
-		type : 2,
-		title : '客户修改',
+		title : '房屋修改',
 		maxmin : true,
 		shadeClose : false,
 		area : [ '800px', '520px' ],
-		content : prefix + '/edit/' + customerId // iframe的url
+		content : prefix + '/edit/' + houseId // iframe的url
 	});
 }
-function batchRemove() {
-	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
-	if (rows.length == 0) {
-		layer.msg("请选择要删除的数据");
-		return;
-	}
-	layer.confirm("确认要删除选中的'" + rows.length + "'条数据吗?", {
-		btn : [ '确定', '取消' ]
-	// 按钮
-	}, function() {
-		var ids = new Array();
-		// 遍历所有选择的行数据，取每条数据对应的ID
-		$.each(rows, function(i, row) {
-			ids[i] = row['customerId'];
-		});
-		
-		$.ajax({
-			type : 'POST',
-			data : {
-				"ids" : ids
-			},
-			url : prefix + '/batchRemove',
-			success : function(r) {
-				if (r.code == 0) {
-					layer.msg(r.msg);
-					reLoad();
-				} else {
-					layer.msg(r.msg);
-				}
-			}
-		});
-	}, function() {});
+function receivables(number) {
+	layer.open({
+		type : 2,
+		title : '财务记录',
+		maxmin : true,
+		shadeClose : false,
+		area : [ '1400px', '520px' ],
+		content : prefix + '/receivableList/' + number // iframe的url
+	});
 }

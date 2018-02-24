@@ -31,7 +31,6 @@
 									type="text" th:value="${house.space}" readonly>
 							</div>
 						</div>
-						
 						<div class="form-group">
 							<label class="col-sm-3 control-label">归属区域：</label>
 							<div class="col-sm-8">
@@ -40,14 +39,39 @@
 							</div>
 						</div>
 						<div class="form-group">
+							<label class="col-sm-3 control-label">房屋说明：</label>
+							<div class="col-sm-8">
+								<input id="houseRemark" name="houseRemark" class="form-control" type="text"
+									th:value="${house.houseRemark}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">房屋类型:</label>
+							<div class="col-sm-8">
+								<label class="radio-inline"> 
+									<input th:field="*{house.houseType}" type="radio" name="houseStatus" value="B013" />
+									存续
+								</label> 
+								<label class="radio-inline"> 
+									<input th:field="*{house.houseType}" type="radio" name="houseStatus" value="A013" />
+									股份
+								</label>
+							</div>
+						</div>
+						<div class="form-group">
 							<label class="col-sm-3 control-label">房屋状态:</label>
 							<div class="col-sm-8">
-								<label class="radio-inline"> <input
-									th:field="*{house.houseStatus}" type="radio" name="houseStatus" value="1" />
+								<label class="radio-inline"> 
+									<input th:field="*{house.houseStatus}" type="radio" name="houseStatus" value="1" />
 									闲置
-								</label> <label class="radio-inline"> <input
-									th:field="*{house.houseStatus}" type="radio" name="houseStatus" value="0" />
-									以租赁
+								</label> 
+								<label class="radio-inline"> 
+									<input th:field="*{house.houseStatus}" type="radio" name="houseStatus" value="0" />
+									已入住
+								</label>
+								<label class="radio-inline"> 
+									<input th:field="*{house.houseStatus}" type="radio" name="houseStatus" value="2" />
+									维护
 								</label>
 							</div>
 						</div>

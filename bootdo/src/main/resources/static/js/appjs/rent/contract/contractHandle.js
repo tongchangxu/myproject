@@ -7,7 +7,7 @@ function load() {
 		.bootstrapTable(
 			{
 				method : 'get', // 服务器数据的请求方式 get or post
-				url : prefix + "/list", // 服务器数据的加载地址
+				url : prefix + "/handleList", // 服务器数据的加载地址
 				// showRefresh : true,
 				// showToggle : true,
 				// showColumns : true,
@@ -18,7 +18,7 @@ function load() {
 				pagination : true, // 设置为true会在底部显示分页条
 				// queryParamsType : "limit",
 				// //设置为limit则会发送符合RESTFull格式的参数
-				singleSelect : false, // 设置为true将禁止多选
+				singleSelect : true, // 设置为true将禁止多选
 				// contentType : "application/x-www-form-urlencoded",
 				// //发送到服务器的数据编码类型
 				pageSize : 10, // 如果设置了分页，每页数据条数
@@ -45,9 +45,6 @@ function load() {
 				// sortOrder.
 				// 返回false将会终止请求
 				columns : [
-					{
-						checkbox : true
-					},
 					{
 						field : 'contractId', // 列字段名
 						title : '合同序号' // 列标题
@@ -145,66 +142,19 @@ function load() {
 						field : 'statusDescription',
 						title : '合同状态说明'
 						
+					},
+					{
+						field : 'handle',
+						title : '操作'
+					},
+					{
+						field : 'handleTime',
+						title : '操作日期'
 					}]
 			});
 }
 
 function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
-}
-
-function add() {
-	// iframe层
-	layer.open({
-		type : 2,
-		title : '创建合同',
-		maxmin : true,
-		shadeClose : false, // 点击遮罩关闭层
-		area : [ '1400px', '520px' ],
-		content : prefix + '/add'
-	});
-}
-function edit(contractNumber) {
-	layer.open({
-		type : 2,
-		title : '修改合同',
-		maxmin : true,
-		shadeClose : false,
-		area : [ '1400px', '520px' ],
-		content : prefix + '/detail/' + contractNumber // iframe的url
-	});
-}
-function batchRemove() {
-	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
-	if (rows.length == 0) {
-		layer.msg("请选择要删除的数据");
-		return;
-	}
-	layer.confirm("确认要删除选中的'" + rows.length + "'条数据吗?", {
-		btn : [ '确定', '取消' ]
-	// 按钮
-	}, function() {
-		var ids = new Array();
-		// 遍历所有选择的行数据，取每条数据对应的ID
-		$.each(rows, function(i, row) {
-			ids[i] = row['contractId'];
-		});
-		
-		$.ajax({
-			type : 'POST',
-			data : {
-				"ids" : ids
-			},
-			url : prefix + '/batchRemove',
-			success : function(r) {
-				if (r.code == 0) {
-					layer.msg(r.msg);
-					reLoad();
-				} else {
-					layer.msg(r.msg);
-				}
-			}
-		});
-	}, function() {});
 }
 

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.bootdo.rent.dao.HouseContractCustomerDao;
 import com.bootdo.rent.domain.HouseContractCustomerDO;
 import com.bootdo.rent.service.HouseContractCustomerService;
+import com.bootdo.rent.vo.HouseContractCustomerVO;
 
 
 @Service
@@ -38,6 +39,11 @@ public class HouseContractCustomerServiceImpl implements HouseContractCustomerSe
 	@Override
 	public int update(HouseContractCustomerDO houseContractCustomerDO) {
 		return houseContractCustomerDao.update(houseContractCustomerDO);
+	}
+
+	@Override
+	public HouseContractCustomerVO getDetail(String number) {
+		return houseContractCustomerDao.getDetail(number);
 	}
 
 	

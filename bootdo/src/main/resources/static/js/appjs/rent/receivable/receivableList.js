@@ -1,4 +1,4 @@
-var prefix = "/rent/customer"
+var prefix = "/rent/receivable"
 $(function() {
 	load();
 });
@@ -7,7 +7,7 @@ function load() {
 		.bootstrapTable(
 			{
 				method : 'get', // 服务器数据的请求方式 get or post
-				url : prefix + "/normalList", // 服务器数据的加载地址
+				url : prefix + "/list2", // 服务器数据的加载地址
 				// showRefresh : true,
 				// showToggle : true,
 				// showColumns : true,
@@ -32,8 +32,11 @@ function load() {
 						// 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 						limit : params.limit,
 						offset : params.offset,
-						customerId : $('#customerId').val(),
-						customerName : $('#customerName').val(),
+						year1 : $('#year1').val(),
+						month1 : $('#month1').val(),
+						year2 : $('#year2').val(),
+						month2 : $('#month2').val(),
+						number:$('#number').val()
 					};
 				},
 				// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -44,50 +47,33 @@ function load() {
 				// 返回false将会终止请求
 				columns : [
 					{
-						field : 'customerId', // 列字段名
-						title : '客户序号' // 列标题
+						field : 'number', // 列字段名
+						title : '业务号' // 列标题
 					},
 					{
-						field : 'customerName',
-						title : '客户名称'
+						field : 'receivableAmount', // 列字段名
+						title : '应收金额' // 列标题
 					},
 					{
-						field : 'customerRemark',
-						title : '房间说明'
+						field : 'receivableDate', // 列字段名
+						title : '缴费日期' // 列标题
 					},
 					{
-						field : 'customerStatus',
-						title : '客户状态',
+						field : 'payStatus', // 列字段名
+						title : '缴费状态', // 列标题
 						align : 'center',
 						formatter : function(value, row, index) {
-							if (value == '0') {
-								return '<span class="label label-danger">禁用</span>';
-							} else if (value == '1') {
-								return '<span class="label label-primary">正常</span>';
+							if (value == '未付') {
+								return '<span class="label label-primary">未付</span>';
+							} else if (value == '已付清') {
+								return '<span class="label label-danger">已付清</span>';
 							}
 						}
-					} ,
-					{
-						title : '操作',
-						field : 'customerId',
-						align : 'center',
-						formatter : function(value, row, index) {
-							var e = '<a  class="btn btn-primary btn-sm" href="#" mce_href="#" title="选择" onclick="selectCustomer(\''
-								+ row.customerId
-								+ '\')"><i class="fa fa-edit ">选择</i></a> ';
-							return e;
-						}
-					} ]
+					}]
 			});
 }
 
 function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
-}
-
-function selectCustomer(customerId){
-	var parentMethodValue=parent.getMethodValue(customerId);//访问父页面方法 
-	var index = parent.layer.getFrameIndex(window.name); //获取窗口索引  
-	parent.layer.close(index);//关闭弹出的子页面窗口  
 }
 

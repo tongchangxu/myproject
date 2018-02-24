@@ -3,6 +3,10 @@ package com.bootdo.rent.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectProvider;
+
+import com.bootdo.rent.dao.provider.CustomerDynaSqlProvider;
 import com.bootdo.rent.domain.CustomerDO;
 
 /**
@@ -17,6 +21,10 @@ public interface CustomerService {
 	
 	List<CustomerDO> list(Map<String, Object> params);
 	
+	List<CustomerDO> normalList(Map<String, Object> params);
+
+	int normalCount();
+	
 	int count();
 	
 	int save(CustomerDO customer);
@@ -24,4 +32,10 @@ public interface CustomerService {
 	int update(CustomerDO customer);
 	
 	int remove(Long customerId);
+	
+	int updateHandle(CustomerDO customer);
+
+	List<CustomerDO> handleList(Map<String, Object> params);
+
+	int countForHandle();
 }

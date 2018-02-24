@@ -30,7 +30,17 @@ public class HouseServiceImpl implements HouseService {
 	public List<HouseDO> list(Map<String, Object> params) {
 		return houseDao.list(params);
 	}
-
+	
+	@Override
+	public List<HouseDO> normalList(Map<String, Object> paramst){
+		return houseDao.normalList(paramst);
+	}
+	
+	@Override
+	public int normalCount(){
+		return houseDao.normalCount();
+	}
+	
 	@Override
 	public int count() {
 		return houseDao.count();
@@ -52,6 +62,21 @@ public class HouseServiceImpl implements HouseService {
 	@Override
 	public int remove(Long id) {
 		return houseDao.remove(id);
+	}
+
+	@Override
+	public int updateHandle(HouseDO house) {
+		return houseDao.updateHandle(house);
+	}
+
+	@Override
+	public List<HouseDO> handleList(Map<String, Object> params) {
+		return houseDao.handleList(params);
+	}
+
+	@Override
+	public int countForHandle() {
+		return houseDao.countForHandle();
 	}
 
 

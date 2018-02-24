@@ -7,10 +7,15 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
 
+import com.bootdo.rent.dao.provider.ContractDynaSqlProvider;
+import com.bootdo.rent.dao.provider.HouseContractCustomerDynaSqlProvider;
 import com.bootdo.rent.domain.CustomerDO;
 import com.bootdo.rent.domain.HouseContractCustomerDO;
+import com.bootdo.rent.vo.ContractVO;
+import com.bootdo.rent.vo.HouseContractCustomerVO;
 
 /**
  * 
@@ -37,4 +42,6 @@ public interface HouseContractCustomerDao {
 			+ "WHERE house_contract_customer_id=#{houseContractCustomerId}")
 	int update(HouseContractCustomerDO houseContractCustomerDO);
 	
+	@SelectProvider(type=HouseContractCustomerDynaSqlProvider.class,method="getDetail")  
+	HouseContractCustomerVO getDetail(String number);
 }
