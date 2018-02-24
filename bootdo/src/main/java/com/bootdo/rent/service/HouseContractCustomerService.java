@@ -3,6 +3,7 @@ package com.bootdo.rent.service;
 import java.util.Map;
 
 import com.bootdo.rent.domain.HouseContractCustomerDO;
+import com.bootdo.rent.vo.HouseContractCustomerVO;
 
 /**
  * 
@@ -19,4 +20,6 @@ public interface HouseContractCustomerService {
 	int save(HouseContractCustomerDO houseContractCustomerDO);
 
 	int update(HouseContractCustomerDO houseContractCustomerDO);
+	
+	HouseContractCustomerVO getDetail(String number);
 }

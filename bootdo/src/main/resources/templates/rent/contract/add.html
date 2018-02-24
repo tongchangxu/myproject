@@ -58,7 +58,8 @@
 									<label class="col-sm-1 control-label">房屋状态:</label>
 									<div class="col-sm-2">
 										<label class="radio-inline"> <input type="radio" name="houseStatus" value="1" disabled="true" />闲置</label> 
-										<label class="radio-inline"> <input  type="radio" name="houseStatus" value="0" disabled="true" />以租赁</label>
+										<label class="radio-inline"> <input  type="radio" name="houseStatus" value="0" disabled="true" />已入住</label>
+									    <label class="radio-inline"> <input  type="radio" name="houseStatus" value="2" disabled="true" />维护</label>
 									</div>
 									<label class="col-sm-1 control-label">归属区域：</label>
 									<div class="col-sm-2">
@@ -89,7 +90,7 @@
 									</div>
 									<label class="col-sm-1 control-label">经办人 ：</label>
 									<div class="col-sm-2">
-										<input id="operator" name="operator" class="form-control"   type="text" readonly="readonly">
+										<input id="operator" name="operator" class="form-control"   type="text">
 									</div>
 									<label class="col-sm-1 control-label">合同名称 ：</label>
 									<div class="col-sm-2">
@@ -109,14 +110,14 @@
 									<div class="col-sm-2">
 										<div class="input-group">
 											<input id="rent" name="rent" class="form-control"   type="text">
-      										<div class="input-group-addon">元</div>
+      										<div class="input-group-addon">元/月</div>
    							 			</div>
 									</div>
 									<label class="col-sm-1 control-label">缴费周期：</label>
 									<div class="col-sm-2">
-										<label class="radio-inline"> <input id="leadTime1" type="radio" name="customerStatus" value="月缴"  />月缴</label> 
-										<label class="radio-inline"> <input id="leadTime2"  type="radio" name="customerStatus" value="季缴"  />季缴</label>
-										<label class="radio-inline"> <input id="leadTime3"  type="radio" name="customerStatus" value="年缴"  />年缴</label>
+										<label class="radio-inline"> <input id="leadTime1" type="radio" name="leadTime" value="月缴"  />月缴</label> 
+										<label class="radio-inline"> <input id="leadTime2"  type="radio" name="leadTime" value="季缴"  />季缴</label>
+										<label class="radio-inline"> <input id="leadTime3"  type="radio" name="leadTime" value="年缴"  />年缴</label>
 									</div>
 								</div>
 								<div class="form-group">
@@ -155,9 +156,12 @@
 								<div class="form-group">
 									<label class="col-sm-1 control-label">合同状态:</label>
 									<div class="col-sm-2">
-										<label class="radio-inline"> <input  type="radio" name="contractStatus" value="1" />已生效</label> 
-										<label class="radio-inline"> <input  type="radio" name="contractStatus" value="0" />未生效</label>
-									</div>
+										<label class="radio-inline"> <input  type="radio" name="contractStatus" value="新增" />新增</label> 
+										<label class="radio-inline"> <input  type="radio" name="contractStatus" value="在用" />在用</label>
+										<!-- <label class="radio-inline"> <input  type="radio" name="contractStatus" value="退租" />退租</label> 
+										<label class="radio-inline"> <input  type="radio" name="contractStatus" value="合同到期" />合同到期</label>
+										<label class="radio-inline"> <input  type="radio" name="contractStatus" value="终止协议" />终止协议</label>  -->
+									</div>	
 									<label class="col-sm-1 control-label">状态说明 ：</label>
 									<div class="col-sm-5">
 										<input id="statusDescription" name="statusDescription" class="form-control" type="text">
@@ -296,6 +300,9 @@
 				},
 				success : function(data) {
 					$("#number").val(data.number);
+					if(data.contractId!=null||data.csontractId!=""){
+						alert("该业务号已被使用！请重新选择");
+					}
 					//$("#number").attr("readonly","readonly");
 				}
 			});

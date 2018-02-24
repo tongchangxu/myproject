@@ -11,25 +11,25 @@
 					<div class="ibox-body">
 						<h1>合同详情</h1>
 							<form class="form-horizontal m-t" id="signupForm">
-								<input id="houseContractCustomerId" name="houseContractCustomerId" class="form-control"  th:value="${contract.houseContractCustomerId}" type="hidden">
+								<input id="houseContractCustomerId" name="houseContractCustomerId" class="form-control"  th:value="${houseCustomer.houseContractCustomerId}" type="hidden">
 								<div class="alert alert-info" role="alert">客户信息：<button class="btn btn-primary" type="button" onclick="getCustomers();">选择客户</button></div>
 								<div class="form-group">
 									<label class="col-sm-1 control-label">客户id：</label>
 									<div class="col-sm-2">
-										<input id="customerId" name="customerId" class="form-control"  th:value="${contract.customerId}" type="text" readonly="readonly">
+										<input id="customerId" name="customerId" class="form-control"  th:value="${houseCustomer.customerId}" type="text" readonly="readonly">
 									</div>
 									<label class="col-sm-1 control-label">客户名称 ：</label>
 									<div class="col-sm-2">
-										<input id="customerName" name="customerName" class="form-control"  th:value="${contract.customerName}" type="text" readonly="readonly">
+										<input id="customerName" name="customerName" class="form-control"  th:value="${houseCustomer.customerName}" type="text" readonly="readonly">
 									</div>
 									<label class="col-sm-1 control-label">客户状态:</label>
 									<div class="col-sm-2">
-										<label class="radio-inline"> <input id="customerStatus1" th:field="*{contract.customerStatus}" type="radio" name="customerStatus" value="1" disabled="true" />正常</label> 
-										<label class="radio-inline"> <input id="customerStatus0" th:field="*{contract.customerStatus}" type="radio" name="customerStatus" value="0" disabled="true" />禁用</label>
+										<label class="radio-inline"> <input id="customerStatus1" th:field="*{houseCustomer.customerStatus}" type="radio" name="customerStatus" value="1" disabled="true" />正常</label> 
+										<label class="radio-inline"> <input id="customerStatus0" th:field="*{houseCustomer.customerStatus}" type="radio" name="customerStatus" value="0" disabled="true" />禁用</label>
 									</div>
 									<label class="col-sm-1 control-label">客户说明 ：</label>
 									<div class="col-sm-2">
-										<input id="customerRemark" name="customerRemark" class="form-control"  th:value="${contract.customerRemark}" type="text" readonly="readonly">
+										<input id="customerRemark" name="customerRemark" class="form-control"  th:value="${houseCustomer.customerRemark}" type="text" readonly="readonly">
 									</div>
 								</div>
 								
@@ -37,44 +37,45 @@
 								<div class="form-group">
 									<label class="col-sm-1 control-label">房屋id：</label>
 									<div class="col-sm-2">
-										<input id="houseId" name="houseId" class="form-control"  th:value="${contract.houseId}" type="text" readonly="readonly">
+										<input id="houseId" name="houseId" class="form-control"  th:value="${houseCustomer.houseId}" type="text" readonly="readonly">
 									</div>
 									<label class="col-sm-1 control-label">房屋编号 ：</label>
 									<div class="col-sm-2">
-										<input id="houseNumber" name="houseNumber" class="form-control"  th:value="${contract.houseNumber}" type="text" readonly="readonly">
+										<input id="houseNumber" name="houseNumber" class="form-control"  th:value="${houseCustomer.houseNumber}" type="text" readonly="readonly">
 									</div>
 									<label class="col-sm-1 control-label">房屋地址：</label>
 									<div class="col-sm-5">
-										<input id="address" name="address" class="form-control"  th:value="${contract.address}" type="text" readonly="readonly">
+										<input id="address" name="address" class="form-control"  th:value="${houseCustomer.address}" type="text" readonly="readonly">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-1 control-label">面积：</label>
 									<div class="col-sm-2">
 										<div class="input-group">
-											<input id="space" name="space" class="form-control"  th:value="${contract.space}" type="text" readonly="readonly">
+											<input id="space" name="space" class="form-control"  th:value="${houseCustomer.space}" type="text" readonly="readonly">
       										<div class="input-group-addon">平方米</div>
    							 			</div>
 									</div>
 									<label class="col-sm-1 control-label">房屋状态:</label>
 									<div class="col-sm-2">
-										<label class="radio-inline"> <input th:field="*{contract.houseStatus}" type="radio" name="houseStatus" value="1" disabled="true" />闲置</label> 
-										<label class="radio-inline"> <input th:field="*{contract.houseStatus}" type="radio" name="houseStatus" value="0" disabled="true" />以租赁</label>
+										<label class="radio-inline"> <input th:field="*{houseCustomer.houseStatus}" type="radio" name="houseStatus" value="1" disabled="true" />闲置</label> 
+										<label class="radio-inline"> <input th:field="*{houseCustomer.houseStatus}" type="radio" name="houseStatus" value="0" disabled="true" />已入住</label>
+										<label class="radio-inline"> <input th:field="*{houseCustomer.houseStatus}" type="radio" name="houseStatus" value="2" disabled="true" />维护</label>
 									</div>
 									<label class="col-sm-1 control-label">归属区域：</label>
 									<div class="col-sm-2">
-										<input id="area" name="area" class="form-control"  th:value="${contract.area}" type="text" readonly="readonly">
+										<input id="area" name="area" class="form-control"  th:value="${houseCustomer.area}" type="text" readonly="readonly">
 									</div>
 									<label class="col-sm-1 control-label">房屋类型：</label>
 									<div class="col-sm-2">
-										<label class="radio-inline"> <input th:field="*{contract.houseType}" type="radio" name="houseType" value="B013" disabled="true" />存续</label> 
-										<label class="radio-inline"> <input th:field="*{contract.houseType}" type="radio" name="househouseTypeStatus" value="A013" disabled="true" />股份</label>
+										<label class="radio-inline"> <input th:field="*{houseCustomer.houseType}" type="radio" name="houseType" value="B013" disabled="true" />存续</label> 
+										<label class="radio-inline"> <input th:field="*{houseCustomer.houseType}" type="radio" name="househouseTypeStatus" value="A013" disabled="true" />股份</label>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-1 control-label">房屋说明：</label>
 									<div class="col-sm-5">
-										<input id="houseRemark" name="houseRemark" class="form-control"  th:value="${contract.houseRemark}" type="text" readonly="readonly">
+										<input id="houseRemark" name="houseRemark" class="form-control"  th:value="${houseCustomer.houseRemark}" type="text" readonly="readonly">
 									</div>
 								</div>
 								
@@ -83,7 +84,7 @@
 									<label class="col-sm-1 control-label">业务号 ：</label>
 									<div class="col-sm-2">
 										<input id="number" name="number" class="form-control"  th:value="${contract.number}" type="text">
-									</div>
+									</div><p id="numberTap"></p>
 								</div>	
 								<div class="form-group">
 									<label class="col-sm-1 control-label">合同id：</label>
@@ -96,7 +97,7 @@
 									</div>
 									<label class="col-sm-1 control-label">经办人 ：</label>
 									<div class="col-sm-2">
-										<input id="operator" name="operator" class="form-control"  th:value="${contract.operator}" type="text" readonly="readonly">
+										<input id="operator" name="operator" class="form-control"  th:value="${contract.operator}" type="text">
 									</div>
 									<label class="col-sm-1 control-label">合同名称 ：</label>
 									<div class="col-sm-2">
@@ -116,14 +117,14 @@
 									<div class="col-sm-2">
 										<div class="input-group">
 											<input id="rent" name="rent" class="form-control"  th:value="${contract.rent}" type="text">
-      										<div class="input-group-addon">元</div>
+      										<div class="input-group-addon">元/月</div>
    							 			</div>
 									</div>
 									<label class="col-sm-1 control-label">缴费周期：</label>
 									<div class="col-sm-2">
-										<label class="radio-inline"> <input id="leadTime1" th:field="*{contract.leadTime}" type="radio" name="customerStatus" value="月缴"  />月缴</label> 
-										<label class="radio-inline"> <input id="leadTime2" th:field="*{contract.leadTime}" type="radio" name="customerStatus" value="季缴"  />季缴</label>
-										<label class="radio-inline"> <input id="leadTime3" th:field="*{contract.leadTime}" type="radio" name="customerStatus" value="年缴"  />年缴</label>
+										<label class="radio-inline"> <input  th:field="*{contract.leadTime}" type="radio" name="leadTime" value="月缴"  />月缴</label> 
+										<label class="radio-inline"> <input  th:field="*{contract.leadTime}" type="radio" name="leadTime" value="季缴"  />季缴</label>
+										<label class="radio-inline"> <input  th:field="*{contract.leadTime}" type="radio" name="leadTime" value="年缴"  />年缴</label>
 									</div>
 								</div>
 								<div class="form-group">
@@ -166,8 +167,11 @@
 								<div class="form-group">
 									<label class="col-sm-1 control-label">合同状态:</label>
 									<div class="col-sm-2">
-										<label class="radio-inline"> <input th:field="*{contract.contractStatus}" type="radio" name="contractStatus" value="1" />已生效</label> 
-										<label class="radio-inline"> <input th:field="*{contract.contractStatus}" type="radio" name="contractStatus" value="0" />未生效</label>
+										<label class="radio-inline"> <input th:field="*{contract.contractStatus}" type="radio" name="contractStatus" value="新增" />新增</label> 
+										<label class="radio-inline"> <input th:field="*{contract.contractStatus}" type="radio" name="contractStatus" value="在用" />在用</label>
+										<label class="radio-inline"> <input th:field="*{contract.contractStatus}" type="radio" name="contractStatus" value="退租" />退租</label> 
+										<label class="radio-inline"> <input th:field="*{contract.contractStatus}" type="radio" name="contractStatus" value="合同到期" />合同到期</label>
+										<label class="radio-inline"> <input th:field="*{contract.contractStatus}" type="radio" name="contractStatus" value="终止协议" />终止协议</label> 
 									</div>
 									<label class="col-sm-1 control-label">状态说明 ：</label>
 									<div class="col-sm-5">
@@ -192,8 +196,8 @@
 	</div>
 	<div th:include="include :: footer"></div>
 	<script th:inline="javascript">
-		var houseId = [[${contract.houseId}]];
-		var customerId = [[${contract.customerId}]];
+		var houseId = [[${houseCustomer.houseId}]];
+		var customerId = [[${houseCustomer.customerId}]];
 	</script>
 	<script type="text/javascript">
 		laydate.render({
@@ -309,6 +313,9 @@
 				},
 				success : function(data) {
 					$("#number").val(data.number);
+					if(data.contractId!=null||data.csontractId!=""){
+						alert("该业务号已被使用！请重新选择");
+					}
 					//$("#number").attr("readonly","readonly");
 				}
 			});

@@ -16,7 +16,31 @@ public class CustomerDO {
 	private String customerStatus;
 	//客户说明
 	private String customerRemark;
-	
+	//操作时间
+    private String handleTime;
+    //操作
+    private String handle;
+    //操作序號
+    private Long customerHandleId;
+    
+	public String getHandleTime() {
+		return handleTime;
+	}
+	public void setHandleTime(String handleTime) {
+		this.handleTime = handleTime;
+	}
+	public String getHandle() {
+		return handle;
+	}
+	public void setHandle(String handle) {
+		this.handle = handle;
+	}
+	public Long getCustomerHandleId() {
+		return customerHandleId;
+	}
+	public void setCustomerHandleId(Long customerHandleId) {
+		this.customerHandleId = customerHandleId;
+	}
 	public Long getCustomerId() {
 		return customerId;
 	}
@@ -46,11 +70,6 @@ public class CustomerDO {
 	}
 	public void setCustomerRemark(String customerRemark) {
 		this.customerRemark = customerRemark;
-	}
-	@Override
-	public String toString() {
-		return "CustomerDO [customerId=" + customerId + ", number=" + number + ", customerName=" + customerName
-				+ ", customerStatus=" + customerStatus + ", customer_remark=" + customerRemark + "]";
 	}
 	
 	

@@ -64,5 +64,30 @@ public class ContractServiceImpl implements ContractService {
 		return contractDao.remove(contractId);
 	}
 
+	@Override
+	public List<ContractDO> contractList() {
+		return contractDao.contractList();
+	}
+
+	@Override
+	public int updateStatus(Map<String, Object> map) {
+		return contractDao.updateStatus(map);
+	}
+
+	@Override
+	public int updateHandle(ContractDO contract) {
+		return contractDao.updateHandle(contract);
+	}
+
+	@Override
+	public List<ContractDO> handleList(Map<String, Object> params) {
+		return contractDao.handleList(params);
+	}
+
+	@Override
+	public int countForHandle() {
+		return contractDao.countForHandle();
+	}
+
 	
 }

@@ -77,7 +77,7 @@ function load() {
 						align : 'center',
 						formatter : function(value, row, index) {
 							if (value == 'B013') {
-								return '<span class="label label-danger">存续</span>';
+								return '<span class="label label-success">存续</span>';
 							} else if (value == 'A013') {
 								return '<span class="label label-primary">股份</span>';
 							}
@@ -92,6 +92,8 @@ function load() {
 								return '<span class="label label-danger">已入住</span>';
 							} else if (value == '1') {
 								return '<span class="label label-primary">闲置</span>';
+							} else if (value == '2') {
+								return '<span class="label label-warning">维护</span>';
 							}
 						}
 					} ,

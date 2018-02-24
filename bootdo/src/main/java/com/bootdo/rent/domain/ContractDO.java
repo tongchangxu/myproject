@@ -43,7 +43,55 @@ public class ContractDO {
 	private String statusDescription;
 	//创建日期
 	private String createTime;
-	
+	//归属区域
+	private String area;
+	//地址
+	private String address;
+	//房屋序号
+    private String houseId;
+    //操作时间
+    private String handleTime;
+    //操作
+    private String handle;
+    //操作序號
+    private Long contractHandleId;
+    
+	public Long getContractHandleId() {
+		return contractHandleId;
+	}
+	public void setContractHandleId(Long contractHandleId) {
+		this.contractHandleId = contractHandleId;
+	}
+	public String getHandleTime() {
+		return handleTime;
+	}
+	public void setHandleTime(String handleTime) {
+		this.handleTime = handleTime;
+	}
+	public String getHandle() {
+		return handle;
+	}
+	public void setHandle(String handle) {
+		this.handle = handle;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getHouseId() {
+		return houseId;
+	}
+	public void setHouseId(String houseId) {
+		this.houseId = houseId;
+	}
+	public String getArea() {
+		return area;
+	}
+	public void setArea(String area) {
+		this.area = area;
+	}
 	public String getGrowthTime() {
 		return growthTime;
 	}
@@ -158,13 +206,5 @@ public class ContractDO {
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
-	@Override
-	public String toString() {
-		return "ContractDO [contractId=" + contractId + ", contractNumber=" + contractNumber + ", operator=" + operator
-				+ ", number=" + number + ", contractName=" + contractName + ", company=" + company + ", startTime="
-				+ startTime + ", stopTime=" + stopTime + ", rent=" + rent + ", leadTime=" + leadTime + ", invoiceType="
-				+ invoiceType + ", growthRate=" + growthRate + ", rentDetail=" + rentDetail + ", rentYear=" + rentYear
-				+ ", deposit=" + deposit + ", contractStatus=" + contractStatus + ", statusDescription="
-				+ statusDescription + ", createTime=" + createTime + "]";
-	}
+	
 }

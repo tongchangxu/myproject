@@ -43,6 +43,9 @@ function validateRule() {
 			contractName : {
 				required : true,
 			},
+			operator : {
+				required : true,
+			},
 			number : {
 				required : true,
 			},
@@ -90,6 +93,9 @@ function validateRule() {
 				required : icon + "合同编号不能为空",
 			},
 			contractName : {
+				required : icon + "合同名称不能为空",
+			},
+			operator : {
 				required : icon + "合同名称不能为空",
 			},
 			number : {
